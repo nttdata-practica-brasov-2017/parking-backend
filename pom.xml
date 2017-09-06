@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>ro.nttdata.bv.parking</groupId>
-    <artifactId>rest</artifactId>
+    <artifactId>parking-backend</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -29,7 +29,7 @@
     </dependencies>
 
     <build>
-        <finalName>ParkingRest</finalName>
+        <finalName>parking-backend</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -47,7 +47,7 @@
                     <version>2.4</version>
                     <configuration>
                         <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                        <warName>parking-rest</warName>
+                        <warName>parking-backend</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
