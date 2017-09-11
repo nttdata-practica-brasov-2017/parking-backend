@@ -1,27 +1,47 @@
 package ro.nttdata.bv.parking.entity;
 
+import javax.persistence.*;
+
 /**
+ *
  * Created by Linda on 08.09.2017.
  */
 
+@Entity
+@Table(name = "T_SPOT")
 public class Spot {
 
-    private int number;
-    private int floor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public int getNumber() {
+    @Column
+    private Integer number;
+
+    @Column
+    private Integer floor;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getNumber() {
         return number;
     }
 
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public void setFloor(int floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 

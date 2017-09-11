@@ -1,35 +1,38 @@
 package ro.nttdata.bv.parking.entity;
 
+import javax.persistence.*;
+
 /**
  * Created by Linda on 08.09.2017.
  */
 
+@Entity
+@Table(name="T_ASSIGNMENT")
 public class Assignment {
 
-    private String username;
-    private int spotNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public String getUsername() {
+    @Column
+    private User username;
+
+    @Column
+    private Spot spot;
+
+    public User getUsername() {
         return username;
     }
 
-    public int getSpotNumber() {
-        return spotNumber;
-    }
-
-    public void setUsername(String username) {
+    public void setUsername(User username) {
         this.username = username;
     }
 
-    public void setSpotNumber(int spotNumber) {
-        this.spotNumber = spotNumber;
+    public Spot getSpot() {
+        return spot;
     }
 
-    @Override
-    public String toString() {
-        return "Assignment{" +
-                "username='" + username + '\'' +
-                ", spotNumber=" + spotNumber +
-                '}';
+    public void setSpot(Spot spot) {
+        this.spot = spot;
     }
 }

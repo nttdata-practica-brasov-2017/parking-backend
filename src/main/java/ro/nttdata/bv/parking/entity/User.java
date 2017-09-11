@@ -1,65 +1,68 @@
 package ro.nttdata.bv.parking.entity;
 
+import javax.persistence.*;
+
 /**
  * Created by Linda on 08.09.2017.
  */
 
+@Entity
+@Table( name = "T_USER")
 public class User {
 
+    @Id
+    @GeneratedValue( strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
     private String username;
+
+    @Column
     private String password;
+
+    @Column
     private String firstName;
+
+    @Column
     private String lastName;
-    private boolean assignedSpot;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public boolean isAssignedSpot() {
-        return assignedSpot;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public void setAssignedSpot(boolean assignedSpot) {
-        this.assignedSpot = assignedSpot;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", assignedSpot=" + assignedSpot +
-                '}';
     }
 }

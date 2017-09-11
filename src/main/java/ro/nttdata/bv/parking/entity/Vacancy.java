@@ -1,57 +1,71 @@
 package ro.nttdata.bv.parking.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Linda on 08.09.2017.
  */
 
+@Entity
+@Table(name="T_VACANCY")
 public class Vacancy {
 
-    private String spotNumber;
-    private Date date;
-    private Date vacatedAt;
-    private String booked_by;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public String getSpotNumber() {
-        return spotNumber;
+    @Column
+    private Spot spot;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date vacatedAt;
+
+    @Column
+    private User bookedBy;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Spot getSpot() {
+        return spot;
+    }
+
+    public void setSpot(Spot spot) {
+        this.spot = spot;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public Date getVacatedAt() {
-        return vacatedAt;
-    }
-
-    public String getBooked_by() {
-        return booked_by;
-    }
-
-    public void setSpotNumber(String spotNumber) {
-        this.spotNumber = spotNumber;
-    }
-
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getVacatedAt() {
+        return vacatedAt;
     }
 
     public void setVacatedAt(Date vacatedAt) {
         this.vacatedAt = vacatedAt;
     }
 
-    public void setBooked_by(String booked_by) {
-        this.booked_by = booked_by;
+    public User getBookedBy() {
+        return bookedBy;
     }
 
-    @Override
-    public String toString() {
-        return "Vacancy{" +
-                "spotNumber='" + spotNumber + '\'' +
-                ", date=" + date +
-                ", vacatedAt=" + vacatedAt +
-                ", booked_by='" + booked_by + '\'' +
-                '}';
+    public void setBookedBy(User bookedBy) {
+        this.bookedBy = bookedBy;
     }
 }
