@@ -15,7 +15,7 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="SPOT_ID")
     private Spot spot;
 
@@ -27,7 +27,7 @@ public class Vacancy {
     @Temporal(TemporalType.TIMESTAMP)
     private Date vacatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOKED_BY")
     private User bookedBy;
 

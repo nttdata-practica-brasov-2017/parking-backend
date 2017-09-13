@@ -22,8 +22,10 @@ public class VacancyController {
 
     @PostMapping("/vacancies/assigned/{username}")
     public void postVacancy(@PathVariable String username,
-                              @RequestParam(value = "from", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
-                              @RequestParam(value = "to", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
+                            @RequestParam(value = "from", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+                            @RequestParam(value = "to", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
+        from = from != null ? from : new Date();
+        to = to != null ? to : new Date();
         vacancyService.createVacancies(username, from, to);
     }
 

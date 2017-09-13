@@ -20,7 +20,6 @@ public class VacancyService {
     private SpotRepository spotRepository;
 
     public List<Vacancy> getVacancies(Date date) {
-
         return vacancyRepository.findVacanciesByDateAndBookedByNull(date);
     }
 
@@ -54,4 +53,6 @@ public class VacancyService {
         }
         return dates;
     }
+
+
 }
