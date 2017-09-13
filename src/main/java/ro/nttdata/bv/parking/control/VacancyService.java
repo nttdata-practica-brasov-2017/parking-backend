@@ -8,11 +8,7 @@ import ro.nttdata.bv.parking.entity.Vacancy;
 import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.VacancyRepository;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class VacancyService {
@@ -25,7 +21,7 @@ public class VacancyService {
 
     public List<Vacancy> getVacancies(Date date) {
 
-        return vacancyRepository.findVacanciesByDateAndBookedByNotNull(date);
+        return vacancyRepository.findVacanciesByDateAndBookedByNull(date);
     }
 
     @Transactional
