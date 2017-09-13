@@ -15,18 +15,20 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name="SPOT_ID")
     private Spot spot;
 
-    @Column
+    @Column( name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @Column
+    @Column( name = "VACATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date vacatedAt;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "BOOKED_BY")
     private User bookedBy;
 
     public long getId() {

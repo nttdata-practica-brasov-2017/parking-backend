@@ -1,17 +1,19 @@
 package ro.nttdata.bv.parking.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Linda on 08.09.2017.
  */
 
 @Entity
-@Table( name = "T_USER")
-public class User {
+@Table(name = "T_USER")
+public class User implements Serializable {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -25,6 +27,9 @@ public class User {
 
     @Column
     private String lastName;
+
+    @OneToMany(mappedBy = "bookedBy")
+    private List<Vacancy> bookings;
 
     public Long getId() {
         return id;

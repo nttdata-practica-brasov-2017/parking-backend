@@ -14,18 +14,20 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
-    private User username;
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
-    @Column
+    @OneToOne
+    @JoinColumn(name = "SPOT_ID")
     private Spot spot;
 
-    public User getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(User username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Spot getSpot() {

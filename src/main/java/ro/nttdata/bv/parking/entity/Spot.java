@@ -1,6 +1,7 @@
 package ro.nttdata.bv.parking.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,9 @@ public class Spot {
 
     @Column
     private Integer floor;
+
+    @OneToMany(mappedBy = "spot")
+    private List<Vacancy> vacancies;
 
     public Long getId() {
         return id;
@@ -43,6 +47,14 @@ public class Spot {
 
     public void setFloor(Integer floor) {
         this.floor = floor;
+    }
+
+    public List<Vacancy> getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(List<Vacancy> vacancies) {
+        this.vacancies = vacancies;
     }
 
     @Override
