@@ -24,7 +24,8 @@ public class VacancyService {
     private SpotRepository spotRepository;
 
     public List<Vacancy> getVacancies(Date date) {
-        return vacancyRepository.findVacanciesByDate(date);
+
+        return vacancyRepository.findVacanciesByDateAndBookedByNotNull(date);
     }
 
     @Transactional

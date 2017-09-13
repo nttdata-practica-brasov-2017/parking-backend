@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface VacancyRepository extends CrudRepository <Vacancy, Long> {
 
-    List<Vacancy> findVacanciesByDate(Date date);
+    List<Vacancy> findVacanciesByDateAndBookedByNotNull(Date date);
 }
 
