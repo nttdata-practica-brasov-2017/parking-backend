@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -20,16 +21,19 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SPOT_ID")
     private Spot spot;
 
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "VACATED_AT")
     @Temporal(TemporalType.TIMESTAMP)

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ro.nttdata.bv.parking.control.LoginService;
 import ro.nttdata.bv.parking.entity.User;
 
+import javax.validation.Valid;
+
 @RestController
 public class LoginController {
 
@@ -15,7 +17,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public String login(@RequestBody @Valid User user) {
         return String.valueOf(loginService.isUserValid(user));
     }
 

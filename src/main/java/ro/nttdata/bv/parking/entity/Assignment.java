@@ -3,6 +3,7 @@ package ro.nttdata.bv.parking.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Linda on 08.09.2017.
@@ -17,10 +18,12 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "SPOT_ID")
     private Spot spot;
