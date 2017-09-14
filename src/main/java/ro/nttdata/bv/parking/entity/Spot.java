@@ -1,5 +1,8 @@
 package ro.nttdata.bv.parking.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
 @Table(name = "T_SPOT")
 public class Spot {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,6 +26,7 @@ public class Spot {
     @Column
     private Integer floor;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "spot")
     private List<Vacancy> vacancies;
 

@@ -1,5 +1,8 @@
 package ro.nttdata.bv.parking.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "T_USER")
 public class User {
+
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,6 +32,7 @@ public class User {
     @Column
     private String lastName;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "bookedBy")
     private List<Vacancy> bookings;
 

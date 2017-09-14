@@ -1,5 +1,9 @@
 package ro.nttdata.bv.parking.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,25 +12,30 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="T_VACANCY")
+@Table(name = "T_VACANCY")
 public class Vacancy {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="SPOT_ID")
+    @JoinColumn(name = "SPOT_ID")
     private Spot spot;
 
-    @Column( name = "DATE")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @Column( name = "VACATED_AT")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "VACATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date vacatedAt;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOKED_BY")
     private User bookedBy;
