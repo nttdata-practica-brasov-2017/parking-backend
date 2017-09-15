@@ -24,7 +24,7 @@ public class BookingService {
     public void createBookings(String username, Integer number, Integer floor, Date date){
        User user = userRepository.findByUsername(username);
        Vacancy vacancy = vacancyRepository.findByDateAndFloorAndNumber(date, floor, number);
-       
+
        if(vacancy.getBookedBy() == null) {
            vacancy.setBookedBy(user);
        } else {

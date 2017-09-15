@@ -2,10 +2,8 @@ package ro.nttdata.bv.parking.boundary;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import ro.nttdata.bv.parking.control.BookingService;
 
 import java.util.Date;
@@ -17,6 +15,7 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping("/bookings/users/{username}/spots/{number}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void postBooking(@PathVariable String username,
                             @PathVariable Integer number,
                             @RequestParam(value = "floor", required = false) Integer floor,
