@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.nttdata.bv.parking.entity.Spot;
 import ro.nttdata.bv.parking.entity.Vacancy;
 import ro.nttdata.bv.parking.error.ParkingException;
-import ro.nttdata.bv.parking.repository.AssignmentRepository;
 import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.VacancyRepository;
 
@@ -38,8 +37,8 @@ public class VacancyService {
     }
 
     private void validateDatesAreAvailable(Spot spot, Date from, Date to) {
-        List<Vacancy> vacancies = vacancyRepository.findVacanciesBySpotAndDateBetween(spot,from, to);
-        if(vacancies != null && vacancies.size()>0) {
+        List<Vacancy> vacancies = vacancyRepository.findVacanciesBySpotAndDateBetween(spot, from, to);
+        if (vacancies != null && vacancies.size() > 0) {
             throw new ParkingException("Spot is already vacated for some of the dates in the interval");
         }
     }
