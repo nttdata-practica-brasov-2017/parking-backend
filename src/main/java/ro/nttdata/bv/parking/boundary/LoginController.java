@@ -1,6 +1,5 @@
 package ro.nttdata.bv.parking.boundary;
 
-import com.sun.deploy.xml.XMLNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +16,8 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public String login(@RequestBody @Valid User user) {
-        return String.valueOf(loginService.isUserValid(user));
+    public LoginService.UserInfo login(@RequestBody @Valid User user) {
+        return loginService.getUser(user);
     }
 
 }

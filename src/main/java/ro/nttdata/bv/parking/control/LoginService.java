@@ -1,12 +1,12 @@
 package ro.nttdata.bv.parking.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.nttdata.bv.parking.entity.Assignment;
 import ro.nttdata.bv.parking.entity.Spot;
 import ro.nttdata.bv.parking.entity.User;
+import ro.nttdata.bv.parking.error.ParkingException;
 import ro.nttdata.bv.parking.repository.AssignmentRepository;
 import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.UserRepository;
@@ -26,7 +26,27 @@ public class LoginService {
     private AssignmentRepository assignmentRepository;
 
     @Transactional
-    public boolean isUserValid(User user) {
+    public UserInfo getUser(User credentials) {
+        //TODO remove when using real database
+        setupMockData();
+
+        User user = userRepository.findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword());
+        if (user != null) {
+            UserInfo response = new UserInfo();
+            response.setFirstName(user.getFirstName());
+            response.setLastName(user.getLastName());
+            response.setUsername(user.getUsername());
+            response.setType(assignmentRepository.findByUser(user) != null
+                    ? UserInfo.UserType.PERMANENT : UserInfo.UserType.TEMPORARY);
+            return response;
+        } else {
+            throw new ParkingException("Failed login!");
+        }
+    }
+
+    private Assignment setupMockData() {
+        assignmentRepository.deleteAll();
+        spotRepository.deleteAll();
         userRepository.deleteAll();
 
         User ana = new User();
@@ -48,8 +68,51 @@ public class LoginService {
         assignment.setUser(ana);
         assignment.setSpot(spot);
         assignmentRepository.save(assignment);
+        return assignment;
+    }
 
-        User result = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-        return result != null;
+    public static class UserInfo {
+
+        public enum UserType{
+            PERMANENT,
+            TEMPORARY
+        }
+
+        private String username;
+        private String firstName;
+        private String lastName;
+        private UserType type;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public UserType getType() {
+            return type;
+        }
+
+        public void setType(UserType type) {
+            this.type = type;
+        }
     }
 }
