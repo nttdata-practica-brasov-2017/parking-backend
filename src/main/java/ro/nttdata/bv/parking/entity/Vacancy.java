@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Linda on 08.09.2017.
@@ -28,13 +29,13 @@ public class Vacancy {
     private Spot spot;
 
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "EET")
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
 
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "EET")
     @Column(name = "VACATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date vacatedAt;

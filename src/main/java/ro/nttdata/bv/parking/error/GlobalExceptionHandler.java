@@ -1,4 +1,4 @@
-package ro.nttdata.bv.parking;
+package ro.nttdata.bv.parking.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

@@ -41,6 +41,7 @@ public class LoginService {
 
         Spot spot = new Spot();
         spot.setNumber(1);
+        spot.setFloor(0);
         spotRepository.save(spot);
 
         Assignment assignment = new Assignment();
