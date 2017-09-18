@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.nttdata.bv.parking.entity.Spot;
 import ro.nttdata.bv.parking.entity.Vacancy;
+import ro.nttdata.bv.parking.repository.AssignmentRepository;
 import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.VacancyRepository;
 
@@ -28,10 +29,14 @@ public class VacancyService {
         Spot spot = spotRepository.findByUsername(username);
 
         List<Date> dates = getDateBetween(from, to);
-        for (Date date : dates){
-           Vacancy vacancy =  createVacancy(spot,date);
-           vacancyRepository.save(vacancy);
+        for (Date date : dates) {
+            Vacancy vacancy = createVacancy(spot, date);
+            vacancyRepository.save(vacancy);
         }
+    }
+
+    public List<Vacancy> getUserVacancies(String username, Date date) {
+        return vacancyRepository.findByAssigneeAndDateAfter(username, date);
     }
 
     private Vacancy createVacancy(Spot spot, Date date) {

@@ -10,6 +10,7 @@ import ro.nttdata.bv.parking.repository.UserRepository;
 import ro.nttdata.bv.parking.repository.VacancyRepository;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BookingService {
@@ -30,6 +31,9 @@ public class BookingService {
        } else {
            throw new ParkingException("Requested spot is not free");
        }
+    }
 
+    public List<Vacancy> getBookings(String username, Date date){
+        return vacancyRepository.findByUsernameAfterDate(username, date);
     }
 }
