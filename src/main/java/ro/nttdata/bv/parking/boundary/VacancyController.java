@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.nttdata.bv.parking.control.VacancyService;
 import ro.nttdata.bv.parking.entity.Vacancy;
+import ro.nttdata.bv.parking.validation.FutureDate;
 
 import java.util.Date;
 import java.util.List;
@@ -24,9 +25,9 @@ public class VacancyController {
     @ResponseStatus(HttpStatus.CREATED)
     public void postVacancy(@PathVariable String username,
                             @RequestParam(value = "from", required = false)
-                            @Future @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+                            @FutureDate @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
                             @RequestParam(value = "to", required = false)
-                            @Future @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
+                            @FutureDate @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
         from = from != null ? from : new Date();
         to = to != null ? to : new Date();
         vacancyService.createVacancies(username, from, to);
@@ -36,7 +37,7 @@ public class VacancyController {
     public List<Vacancy> getVacancies(
             @RequestParam(name = "date", required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd")
-            @Future Date date) {
+            @FutureDate Date date) {
         return vacancyService.getVacancies(date != null ? date : new Date());
     }
 
