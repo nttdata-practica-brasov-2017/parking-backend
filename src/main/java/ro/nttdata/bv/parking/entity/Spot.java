@@ -2,6 +2,8 @@ package ro.nttdata.bv.parking.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import ro.nttdata.bv.parking.boundary.Views;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,10 +23,12 @@ public class Spot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(Views.Public.class)
     @NotNull
     @Column
     private Integer number;
 
+    @JsonView(Views.Public.class)
     @Column
     private Integer floor;
 

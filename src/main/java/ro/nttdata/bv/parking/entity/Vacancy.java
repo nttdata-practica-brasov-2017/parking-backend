@@ -3,6 +3,8 @@ package ro.nttdata.bv.parking.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+import ro.nttdata.bv.parking.boundary.Views;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,12 +24,14 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @JsonView(Views.Public.class)
     @NotNull
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SPOT_ID")
     private Spot spot;
 
+    @JsonView(Views.Public.class)
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "EET")
     @Column(name = "DATE")
@@ -40,6 +44,7 @@ public class Vacancy {
     @Temporal(TemporalType.TIMESTAMP)
     private Date vacatedAt;
 
+    @JsonView(Views.Public.class)
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOKED_BY")
