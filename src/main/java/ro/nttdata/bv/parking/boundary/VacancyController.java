@@ -1,5 +1,6 @@
 package ro.nttdata.bv.parking.boundary;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,7 @@ public class VacancyController {
         return vacancyService.getVacancies(date != null ? date : new Date());
     }
 
+    @JsonView(Views.Public.class)
     @GetMapping("/{username}/vacancies/assigned")
     public List<Vacancy> getUserVacancies(@PathVariable String username,
                                           @RequestParam(value = "date", required = false)
