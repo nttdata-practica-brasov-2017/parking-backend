@@ -20,7 +20,7 @@ public class VacancyController {
     @Autowired
     private VacancyService vacancyService;
 
-    @PostMapping("/vacancies/assigned/{username}")
+    @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)
     public void postVacancy(@PathVariable String username,
                             @RequestParam(value = "from", required = false)
@@ -38,5 +38,13 @@ public class VacancyController {
             @DateTimeFormat(pattern = "yyyy-MM-dd")
             @Future Date date) {
         return vacancyService.getVacancies(date != null ? date : new Date());
+    }
+
+    @GetMapping("/{username}/vacancies/assigned")
+    public List<Vacancy> getUserVacancies(@PathVariable String username,
+                                          @RequestParam(value = "date", required = false)
+                                          @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        date = date != null ? date : new Date();
+        return vacancyService.getUserVacancies(username, date);
     }
 }
