@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ro.nttdata.bv.parking.entity.Spot;
 import ro.nttdata.bv.parking.entity.Vacancy;
-import ro.nttdata.bv.parking.entity.Assignment;
 
 import java.util.Date;
 import java.util.List;
@@ -25,10 +24,11 @@ public interface VacancyRepository extends CrudRepository<Vacancy, Long> {
     List<Vacancy> findVacanciesBySpotAndDateBetween(@Param("spot") Spot spot,
                                                     @Param("startDate") Date from,
                                                     @Param("endDate") Date to);
+
     @Query("select v from Vacancy v where v.bookedBy.username = :username and v.date >= :date")
     List<Vacancy> findByUsernameAfterDate(@Param("username") String username, @Param("date") Date date);
 
-    @Query("select v From Vacancy v join Assignment a where a.spot = v.spot and a.user.username = :username and v.date >= :date")
+    @Query("select v From Assignment a inner join a.spot.vacancies as v where a.user.username = :username and v.date >= :date")
     List<Vacancy> findByAssigneeAndDateAfter(@Param("username") String username, @Param("date") Date date);
 }
 
