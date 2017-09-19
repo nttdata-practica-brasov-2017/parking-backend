@@ -2,23 +2,25 @@
 <configuration>
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
-            </Pattern>
+            <Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</Pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>TRACE</level>
+            <level>INFO</level>
         </filter>
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>parking.log</file>
-        <append>true</append>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../logs/parking.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>parking.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
         <immediateFlush>true</immediateFlush>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
-
 
     <logger name="ro.nttdata.bv.parking" additivity="false">
         <level value="DEBUG"/>
@@ -27,7 +29,6 @@
     </logger>
     <logger name="org.springframework">
         <level value="DEBUG"/>
-        <appender-ref ref="consoleAppender"/>
         <appender-ref ref="file"/>
     </logger>
     <root>
