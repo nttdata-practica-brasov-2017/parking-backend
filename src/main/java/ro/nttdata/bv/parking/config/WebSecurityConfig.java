@@ -1,4 +1,4 @@
-package ro.nttdata.bv.parking.security;
+package ro.nttdata.bv.parking.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import ro.nttdata.bv.parking.security.ParkingUserDetailsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated().and().httpBasic()
                 .authenticationEntryPoint(basicAuthenticationEntryPoint());

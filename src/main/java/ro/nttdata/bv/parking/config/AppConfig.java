@@ -1,4 +1,4 @@
-package ro.nttdata.bv.parking;
+package ro.nttdata.bv.parking.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "ro.nttdata.bv.parking.repository")
 @EnableTransactionManagement
 @ComponentScan(basePackages = "ro.nttdata.bv.parking")
 public class AppConfig {

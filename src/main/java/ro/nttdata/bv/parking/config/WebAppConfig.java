@@ -1,4 +1,4 @@
-package ro.nttdata.bv.parking;
+package ro.nttdata.bv.parking.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
