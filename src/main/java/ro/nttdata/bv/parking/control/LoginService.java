@@ -10,6 +10,7 @@ import ro.nttdata.bv.parking.error.ParkingException;
 import ro.nttdata.bv.parking.repository.AssignmentRepository;
 import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.UserRepository;
+import ro.nttdata.bv.parking.repository.VacancyRepository;
 
 import java.util.Arrays;
 
@@ -24,6 +25,9 @@ public class LoginService {
 
     @Autowired
     private AssignmentRepository assignmentRepository;
+
+    @Autowired
+    private VacancyRepository vacancyRepository;
 
     @Transactional
     public UserInfo getUser(User credentials) {
@@ -46,6 +50,7 @@ public class LoginService {
 
     private Assignment setupMockData() {
         assignmentRepository.deleteAll();
+        vacancyRepository.deleteAll();
         spotRepository.deleteAll();
         userRepository.deleteAll();
 
