@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.nttdata.bv.parking.entity.User;
 import ro.nttdata.bv.parking.entity.Vacancy;
 import ro.nttdata.bv.parking.error.ParkingException;
+import ro.nttdata.bv.parking.repository.AssignmentRepository;
 import ro.nttdata.bv.parking.repository.UserRepository;
 import ro.nttdata.bv.parking.repository.VacancyRepository;
 
@@ -21,6 +22,9 @@ public class BookingService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AssignmentRepository assignmentRepository;
+
     @Transactional
     public void createBookings(String username, Integer number, Integer floor, Date date) {
         User user = userRepository.findByUsername(username);
@@ -31,15 +35,19 @@ public class BookingService {
 
         Vacancy vacancy = vacancyRepository.findByDateAndFloorAndNumber(date, floor, number);
 
-        if (vacancy == null) {
+        if (vacancy == null || vacancy.getBookedBy() != null) {
             throw new ParkingException("Spot is not free for the requested date");
         }
 
-        if (vacancy.getBookedBy() == null) {
-            vacancy.setBookedBy(user);
-        } else {
+        if (assignmentRepository.findByUser(user) != null) {
+            throw new ParkingException("User with permanent spot can not book a vacancy");
+        }
+
+        if (vacancy.getBookedBy() != null) {
             throw new ParkingException("Requested spot is not free");
         }
+
+        vacancy.setBookedBy(user);
     }
 
     public List<Vacancy> getBookings(String username, Date date) {
