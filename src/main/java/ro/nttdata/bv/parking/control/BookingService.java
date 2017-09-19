@@ -22,18 +22,27 @@ public class BookingService {
     private UserRepository userRepository;
 
     @Transactional
-    public void createBookings(String username, Integer number, Integer floor, Date date){
-       User user = userRepository.findByUsername(username);
-       Vacancy vacancy = vacancyRepository.findByDateAndFloorAndNumber(date, floor, number);
+    public void createBookings(String username, Integer number, Integer floor, Date date) {
+        User user = userRepository.findByUsername(username);
 
-       if(vacancy.getBookedBy() == null) {
-           vacancy.setBookedBy(user);
-       } else {
-           throw new ParkingException("Requested spot is not free");
-       }
+        if (user == null) {
+            throw new ParkingException("User does not exist");
+        }
+
+        Vacancy vacancy = vacancyRepository.findByDateAndFloorAndNumber(date, floor, number);
+
+        if (vacancy == null) {
+            throw new ParkingException("Spot is not free for the requested date");
+        }
+
+        if (vacancy.getBookedBy() == null) {
+            vacancy.setBookedBy(user);
+        } else {
+            throw new ParkingException("Requested spot is not free");
+        }
     }
 
-    public List<Vacancy> getBookings(String username, Date date){
+    public List<Vacancy> getBookings(String username, Date date) {
         return vacancyRepository.findByUsernameAfterDate(username, date);
     }
 }
