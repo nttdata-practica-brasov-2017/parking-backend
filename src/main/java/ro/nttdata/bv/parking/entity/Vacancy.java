@@ -21,6 +21,7 @@ public class Vacancy {
 
     @JsonIgnore
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 

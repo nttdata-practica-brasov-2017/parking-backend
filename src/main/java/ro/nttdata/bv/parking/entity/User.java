@@ -20,25 +20,26 @@ public class User {
 
     @JsonIgnore
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @JsonView(Views.Public.class)
     @NotNull
-    @Column
+    @Column(name = "USERNAME")
     private String username;
 
     @JsonView(Views.Internal.class)
     @NotNull
-    @Column
+    @Column(name = "PASSWORD")
     private String password;
 
     @JsonView(Views.Public.class)
-    @Column
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
     @JsonView(Views.Public.class)
-    @Column
+    @Column(name = "LAST_NAME")
     private String lastName;
 
     @JsonBackReference

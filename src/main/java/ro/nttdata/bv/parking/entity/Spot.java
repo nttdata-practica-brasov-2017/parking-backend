@@ -20,16 +20,17 @@ public class Spot {
 
     @JsonIgnore
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @JsonView(Views.Public.class)
     @NotNull
-    @Column
+    @Column(name = "SPOT_NUMBER")
     private Integer number;
 
     @JsonView(Views.Public.class)
-    @Column
+    @Column(name ="FLOOR")
     private Integer floor;
 
     @JsonBackReference

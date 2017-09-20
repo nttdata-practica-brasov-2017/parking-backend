@@ -31,9 +31,6 @@ public class LoginService {
 
     @Transactional
     public UserInfo getUser(User credentials) {
-        //TODO remove when using real database
-        setupMockData();
-
         User user = userRepository.findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword());
         if (user != null) {
             UserInfo response = new UserInfo();
@@ -46,34 +43,6 @@ public class LoginService {
         } else {
             throw new ParkingException("Failed login!");
         }
-    }
-
-    private Assignment setupMockData() {
-        assignmentRepository.deleteAll();
-        vacancyRepository.deleteAll();
-        spotRepository.deleteAll();
-        userRepository.deleteAll();
-
-        User ana = new User();
-        ana.setUsername("ana");
-        ana.setPassword("ana123");
-
-        User bogdan = new User();
-        bogdan.setUsername("bogdan");
-        bogdan.setPassword("bogdan123");
-
-        userRepository.save(Arrays.asList(ana, bogdan));
-
-        Spot spot = new Spot();
-        spot.setNumber(1);
-        spot.setFloor(0);
-        spotRepository.save(spot);
-
-        Assignment assignment = new Assignment();
-        assignment.setUser(ana);
-        assignment.setSpot(spot);
-        assignmentRepository.save(assignment);
-        return assignment;
     }
 
     public static class UserInfo {
