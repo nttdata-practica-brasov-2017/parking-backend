@@ -1,6 +1,8 @@
 package ro.nttdata.bv.parking.boundary;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,6 @@ import ro.nttdata.bv.parking.validation.FutureDate;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.Future;
 
 @RestController
 @Validated
@@ -21,6 +22,8 @@ public class VacancyController {
 
     @Autowired
     private VacancyService vacancyService;
+
+    private final Logger log = LoggerFactory.getLogger(VacancyController.class);
 
     @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,6 +35,7 @@ public class VacancyController {
         from = from != null ? from : new Date();
         to = to != null ? to : new Date();
         vacancyService.createVacancies(username, from, to);
+        log.info("Vacancy for user {} was created", username);
     }
 
     @GetMapping("/vacancies")
