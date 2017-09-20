@@ -1,5 +1,7 @@
 package ro.nttdata.bv.parking.error;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {
 
+    private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -23,6 +26,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getFieldErrors()
                 .forEach(fieldError -> errors.put(fieldError.getField(), fieldError.getDefaultMessage()));
+        LOG.debug("Validation failed: {}", exception.getMessage());
         return error(errors);
     }
 
@@ -33,6 +37,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         exception.getConstraintViolations()
                 .forEach(constraintViolation -> errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage()));
+        LOG.debug("Validation failed: {}", exception.getMessage());
         return error(errors);
     }
 
@@ -40,6 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Map<String, Object> handle(Exception exception) {
+        LOG.error("Server error:", exception);
         return error(exception.getMessage());
     }
 

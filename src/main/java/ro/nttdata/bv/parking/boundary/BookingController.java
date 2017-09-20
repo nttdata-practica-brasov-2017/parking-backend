@@ -1,6 +1,8 @@
 package ro.nttdata.bv.parking.boundary;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import java.util.List;
 @RestController
 public class BookingController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(VacancyController.class);
+
     @Autowired
     private BookingService bookingService;
 
@@ -25,6 +29,7 @@ public class BookingController {
                             @RequestParam(value = "date", required = false)
                             @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         date = date != null ? date : new Date();
+        LOG.info("User {} booked spot {} on {}", username, number, date);
         bookingService.createBookings(username, number, floor, date);
     }
 
@@ -34,6 +39,7 @@ public class BookingController {
                                     @RequestParam(value = "date", required = false)
                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         date = date != null ? date : new Date();
+        LOG.info("Listed bookings for user {} after {}", username, date);
         return bookingService.getBookings(username, date);
     }
 

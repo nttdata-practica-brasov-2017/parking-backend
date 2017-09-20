@@ -20,10 +20,10 @@ import java.util.List;
 @Validated
 public class VacancyController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(VacancyController.class);
+
     @Autowired
     private VacancyService vacancyService;
-
-    private final Logger log = LoggerFactory.getLogger(VacancyController.class);
 
     @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)
@@ -35,7 +35,7 @@ public class VacancyController {
         from = from != null ? from : new Date();
         to = to != null ? to : new Date();
         vacancyService.createVacancies(username, from, to);
-        log.info("Vacancy for user {} was created", username);
+        LOG.info("User {} vacated spot between {} - {} ", username, from, to);
     }
 
     @GetMapping("/vacancies")
@@ -43,7 +43,10 @@ public class VacancyController {
             @RequestParam(name = "date", required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd")
             @FutureDate Date date) {
-        return vacancyService.getVacancies(date != null ? date : new Date());
+        date = date != null ? date : new Date();
+        List<Vacancy> vacancies = vacancyService.getVacancies(date);
+        LOG.info("Listed vacancies at {}" , date);
+        return vacancies;
     }
 
     @JsonView(Views.Public.class)
@@ -52,6 +55,9 @@ public class VacancyController {
                                           @RequestParam(value = "date", required = false)
                                           @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         date = date != null ? date : new Date();
-        return vacancyService.getUserVacancies(username, date);
+        List<Vacancy> vacancies = vacancyService.getUserVacancies(username, date);
+        LOG.info("Listed vacancies for user {} after {} ", username, date);
+        return vacancies;
+
     }
 }
