@@ -43,8 +43,8 @@ public class BookingService {
             throw new ParkingException("User with permanent spot can not book a vacancy");
         }
 
-        if (vacancy.getBookedBy() != null) {
-            throw new ParkingException("Requested spot is not free");
+        if(vacancyRepository.findByUsernameAndDate(username, date) != null){
+            throw new ParkingException("User has a spot previously booked for that day");
         }
 
         vacancy.setBookedBy(user);
