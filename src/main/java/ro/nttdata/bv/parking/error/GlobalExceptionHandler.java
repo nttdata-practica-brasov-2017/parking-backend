@@ -42,6 +42,15 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Map<String, Object> handle(ParkingException exception) {
+        LOG.error("Bussiness validation error:", exception);
+        return error(exception.getMessage());
+    }
+
+
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Map<String, Object> handle(Exception exception) {
