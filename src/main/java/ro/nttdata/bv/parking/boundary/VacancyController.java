@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.nttdata.bv.parking.control.VacancyService;
 import ro.nttdata.bv.parking.entity.Vacancy;
+import ro.nttdata.bv.parking.validation.AuthUser;
 import ro.nttdata.bv.parking.validation.FutureDate;
+import ro.nttdata.bv.parking.validation.UserValidator;
 
 import java.util.Date;
 import java.util.List;
@@ -25,9 +27,12 @@ public class VacancyController {
     @Autowired
     private VacancyService vacancyService;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)
-    public void postVacancy(@PathVariable String username,
+    public void postVacancy(@PathVariable @AuthUser String username,
                             @RequestParam(value = "from", required = false)
                             @FutureDate @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
                             @RequestParam(value = "to", required = false)
@@ -51,7 +56,7 @@ public class VacancyController {
 
     @JsonView(Views.Public.class)
     @GetMapping("/{username}/vacancies/assigned")
-    public List<Vacancy> getUserVacancies(@PathVariable String username,
+    public List<Vacancy> getUserVacancies(@PathVariable @AuthUser String username,
                                           @RequestParam(value = "date", required = false)
                                           @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         date = date != null ? date : new Date();
