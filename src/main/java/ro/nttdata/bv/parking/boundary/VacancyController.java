@@ -12,7 +12,6 @@ import ro.nttdata.bv.parking.control.VacancyService;
 import ro.nttdata.bv.parking.entity.Vacancy;
 import ro.nttdata.bv.parking.validation.AuthUser;
 import ro.nttdata.bv.parking.validation.FutureDate;
-import ro.nttdata.bv.parking.validation.UserValidator;
 
 import java.util.Date;
 import java.util.List;
@@ -26,9 +25,6 @@ public class VacancyController {
 
     @Autowired
     private VacancyService vacancyService;
-
-    @Autowired
-    private UserValidator userValidator;
 
     @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)

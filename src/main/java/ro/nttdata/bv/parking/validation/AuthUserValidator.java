@@ -7,15 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-
-@Component
-public class UserValidator implements ConstraintValidator<AuthUser, String> {
-
-   public String getCurrentlyAuthenticatedUser() {
-       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       String currentPrincipalName = authentication.getName();
-       return currentPrincipalName;
-   }
+public class AuthUserValidator implements ConstraintValidator<AuthUser, String> {
 
     @Override
     public void initialize(AuthUser authUser) {

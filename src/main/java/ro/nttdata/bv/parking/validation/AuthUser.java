@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 
 @Target({ FIELD, METHOD, PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UserValidator.class)
+@Constraint(validatedBy = AuthUserValidator.class)
 @Documented
 public @interface AuthUser {
     String message() default "{AuthUser.message}";

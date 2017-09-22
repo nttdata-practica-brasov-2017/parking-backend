@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ro.nttdata.bv.parking.control.LoginService;
 import ro.nttdata.bv.parking.entity.User;
-import ro.nttdata.bv.parking.validation.UserValidator;
 
 import javax.validation.Valid;
 
