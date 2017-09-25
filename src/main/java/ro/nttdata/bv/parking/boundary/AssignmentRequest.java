@@ -1,4 +1,4 @@
-package ro.nttdata.bv.parking.entity;
+package ro.nttdata.bv.parking.boundary;
 
 public class AssignmentRequest {
 
