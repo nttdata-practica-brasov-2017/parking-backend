@@ -12,13 +12,13 @@
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>../logs/parking.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>parking.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>../logs/parking.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>100MB</totalSizeCap>
         </rollingPolicy>
         <immediateFlush>true</immediateFlush>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</pattern>
         </encoder>
     </appender>
 
@@ -32,7 +32,7 @@
         <appender-ref ref="file"/>
     </logger>
     <root>
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="file"/>
     </root>

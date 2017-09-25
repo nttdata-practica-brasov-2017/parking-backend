@@ -13,10 +13,9 @@ import javax.validation.constraints.NotNull;
 @Table(name="T_ASSIGNMENT")
 public class Assignment {
 
-    @JsonIgnore
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

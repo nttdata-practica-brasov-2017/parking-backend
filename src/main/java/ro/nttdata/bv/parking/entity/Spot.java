@@ -2,6 +2,7 @@ package ro.nttdata.bv.parking.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import ro.nttdata.bv.parking.boundary.Views;
 
@@ -18,10 +19,9 @@ import java.util.List;
 @Table(name = "T_SPOT")
 public class Spot {
 
-    @JsonIgnore
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonView(Views.Public.class)
@@ -42,7 +42,7 @@ public class Spot {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.id = this.id;
     }
 
     public Integer getNumber() {
@@ -69,11 +69,4 @@ public class Spot {
         this.vacancies = vacancies;
     }
 
-    @Override
-    public String toString() {
-        return "Spot{" +
-                "number=" + number +
-                ", floor=" + floor +
-                '}';
-    }
 }

@@ -28,7 +28,7 @@ public interface VacancyRepository extends CrudRepository<Vacancy, Long> {
     @Query("select v from Vacancy v where v.bookedBy.username = :username and v.date >= :date")
     List<Vacancy> findByUsernameAfterDate(@Param("username") String username, @Param("date") Date date);
 
-    @Query("select v From Assignment a inner join a.spot.vacancies as v where a.user.username = :username and v.date >= :date")
+    @Query("select v from Assignment a inner join a.spot.vacancies as v where a.user.username = :username and v.date >= :date")
     List<Vacancy> findByAssigneeAndDateAfter(@Param("username") String username, @Param("date") Date date);
 
     @Query("select v from Vacancy v where v.bookedBy.username = :username and v.date = :date")

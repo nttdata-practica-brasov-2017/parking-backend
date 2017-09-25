@@ -18,10 +18,9 @@ import java.util.List;
 @Table(name = "T_USER")
 public class User {
 
-    @JsonIgnore
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonView(Views.Public.class)

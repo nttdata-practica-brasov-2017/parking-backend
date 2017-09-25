@@ -21,13 +21,7 @@ public class LoginService {
     private UserRepository userRepository;
 
     @Autowired
-    private SpotRepository spotRepository;
-
-    @Autowired
     private AssignmentRepository assignmentRepository;
-
-    @Autowired
-    private VacancyRepository vacancyRepository;
 
     @Transactional
     public UserInfo getUser(User credentials) {
