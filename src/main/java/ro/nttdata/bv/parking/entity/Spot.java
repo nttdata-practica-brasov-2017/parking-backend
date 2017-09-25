@@ -1,8 +1,6 @@
 package ro.nttdata.bv.parking.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import ro.nttdata.bv.parking.boundary.Views;
 
@@ -11,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- *
  * Created by Linda on 08.09.2017.
  */
 
@@ -30,7 +27,7 @@ public class Spot {
     private Integer number;
 
     @JsonView(Views.Public.class)
-    @Column(name ="FLOOR")
+    @Column(name = "FLOOR")
     private Integer floor;
 
     @JsonBackReference

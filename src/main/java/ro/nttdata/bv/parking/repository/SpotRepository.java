@@ -15,6 +15,4 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
     Spot findByUsername(@Param("username") String username);
 
     List<Spot> findAll();
-    Spot findById(Long id);
-
 }

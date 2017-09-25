@@ -28,7 +28,7 @@ public class VacancyService {
     public void createVacancies(String username, Date from, Date to) {
         Spot spot = spotRepository.findByUsername(username);
 
-        if(spot == null){
+        if (spot == null) {
             throw new ParkingException("User does not have a spot assigned");
         }
 

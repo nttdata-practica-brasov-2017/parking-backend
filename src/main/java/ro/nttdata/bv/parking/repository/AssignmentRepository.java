@@ -8,9 +8,10 @@ import ro.nttdata.bv.parking.entity.User;
 import java.util.List;
 
 @Repository
-public interface AssignmentRepository extends JpaRepository<Assignment, Long>{
+public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
 
     Assignment findByUser(User user);
+
     List<Assignment> findAll();
 
 }

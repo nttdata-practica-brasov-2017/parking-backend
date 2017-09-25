@@ -3,16 +3,10 @@ package ro.nttdata.bv.parking.control;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.nttdata.bv.parking.entity.Assignment;
-import ro.nttdata.bv.parking.entity.Spot;
 import ro.nttdata.bv.parking.entity.User;
 import ro.nttdata.bv.parking.error.ParkingException;
 import ro.nttdata.bv.parking.repository.AssignmentRepository;
-import ro.nttdata.bv.parking.repository.SpotRepository;
 import ro.nttdata.bv.parking.repository.UserRepository;
-import ro.nttdata.bv.parking.repository.VacancyRepository;
-
-import java.util.Arrays;
 
 @Service
 public class LoginService {
@@ -41,7 +35,7 @@ public class LoginService {
 
     public static class UserInfo {
 
-        public enum UserType{
+        public enum UserType {
             PERMANENT,
             TEMPORARY
         }

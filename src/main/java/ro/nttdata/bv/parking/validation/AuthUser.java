@@ -11,12 +11,14 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 
-@Target({ FIELD, METHOD, PARAMETER })
+@Target({FIELD, METHOD, PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = AuthUserValidator.class)
 @Documented
 public @interface AuthUser {
     String message() default "Authenticated user not allowed to access resource";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

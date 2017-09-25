@@ -43,7 +43,7 @@ public class BookingService {
             throw new ParkingException("User with permanent spot can not book a vacancy");
         }
 
-        if(vacancyRepository.findByUsernameAndDate(username, date) != null){
+        if (vacancyRepository.findByUsernameAndDate(username, date) != null) {
             throw new ParkingException("User has a spot previously booked for that day");
         }
 

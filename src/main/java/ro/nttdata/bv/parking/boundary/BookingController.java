@@ -37,8 +37,8 @@ public class BookingController {
     @JsonView(Views.Public.class)
     @GetMapping("{username}/bookings")
     public List<Vacancy> getUserBookings(@PathVariable @AuthUser String username,
-                                    @RequestParam(value = "date", required = false)
-                                    @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+                                         @RequestParam(value = "date", required = false)
+                                         @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         date = date != null ? date : new Date();
         LOG.info("Listed bookings for user {} after {}", username, date);
         return bookingService.getBookings(username, date);

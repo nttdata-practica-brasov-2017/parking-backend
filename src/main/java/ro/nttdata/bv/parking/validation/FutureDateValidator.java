@@ -6,11 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class FutureDateValidator implements ConstraintValidator<FutureDate, Date> {
-    public final void initialize(final FutureDate annotation) {}
+    public final void initialize(final FutureDate annotation) {
+    }
 
     public final boolean isValid(final Date value,
                                  final ConstraintValidatorContext context) {
-        if(value == null) {
+        if (value == null) {
             return true;
         } else {
             Calendar calendar = Calendar.getInstance();

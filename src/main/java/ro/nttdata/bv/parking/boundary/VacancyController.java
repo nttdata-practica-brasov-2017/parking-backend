@@ -48,7 +48,7 @@ public class VacancyController {
             @FutureDate Date date) {
         date = date != null ? date : new Date();
         List<Vacancy> vacancies = vacancyService.getVacancies(date);
-        LOG.info("Listed vacancies at {}" , date);
+        LOG.info("Listed vacancies at {}", date);
         return vacancies;
     }
 

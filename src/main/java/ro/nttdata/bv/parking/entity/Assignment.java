@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name="T_ASSIGNMENT")
+@Table(name = "T_ASSIGNMENT")
 public class Assignment {
 
     @Id
