@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.nttdata.bv.parking.control.VacancyService;
 import ro.nttdata.bv.parking.entity.Vacancy;
 import ro.nttdata.bv.parking.validation.AuthUser;
+import ro.nttdata.bv.parking.validation.DateRange;
 import ro.nttdata.bv.parking.validation.FutureDate;
 
 import java.util.Date;
@@ -26,6 +27,7 @@ public class VacancyController {
     @Autowired
     private VacancyService vacancyService;
 
+    @DateRange
     @PostMapping("{username}/vacancies/assigned")
     @ResponseStatus(HttpStatus.CREATED)
     public void postVacancy(@PathVariable @AuthUser String username,

@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Constraint(validatedBy = FutureDateValidator.class)
 @Documented
 public @interface FutureDate {
-    String message() default "{FutureDate.message}";
+    String message() default "Date must not be in the past";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

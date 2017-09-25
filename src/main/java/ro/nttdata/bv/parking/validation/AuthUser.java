@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Constraint(validatedBy = AuthUserValidator.class)
 @Documented
 public @interface AuthUser {
-    String message() default "{AuthUser.message}";
+    String message() default "Authenticated user not allowed to access resource";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
