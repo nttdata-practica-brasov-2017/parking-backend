@@ -22,7 +22,7 @@ public class Vacancy {
     @JsonIgnore
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @JsonView(Views.Public.class)

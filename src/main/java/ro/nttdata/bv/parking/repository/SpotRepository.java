@@ -12,4 +12,5 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
     @Query("select a.spot from Assignment a where a.user.username = :username")
     Spot findByUsername(@Param("username") String username);
 
+    Spot findByNumberAndFloor(int number, int floor);
 }
