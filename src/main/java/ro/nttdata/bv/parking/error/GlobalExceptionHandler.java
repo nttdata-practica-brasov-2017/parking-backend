@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getFieldErrors()
                 .forEach(fieldError -> errors.put(fieldError.getField(), fieldError.getDefaultMessage()));
-        LOG.debug("Validation failed: {}", exception.getMessage());
+        LOG.info("Validation failed: {}", exception.getMessage());
         return error(errors);
     }
 
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         exception.getConstraintViolations()
                 .forEach(constraintViolation -> errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage()));
-        LOG.debug("Validation failed: {}", exception.getMessage());
+        LOG.info("Validation failed: {}", exception.getMessage());
         return error(errors);
     }
 
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public Map<String, Object> handle(ParkingException exception) {
-        LOG.debug("Bussiness validation error: {}", exception.getMessage());
+        LOG.info("Business validation error: {}", exception.getMessage());
         return error(exception.getMessage());
     }
 
