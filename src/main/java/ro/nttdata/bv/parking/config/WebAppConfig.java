@@ -34,7 +34,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "DELETE")
+                .allowedMethods("GET", "POST", "DELETE", "OPTIONS")
                 .allowCredentials(true);
     }
 
